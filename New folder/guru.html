@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Designing Guru</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #240015, #800080); /* Gradient background */
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .content-box {
+            background: rgba(255, 255, 255, 0.1); /* Semi-transparent white for contrast */
+            border-radius: 20px; /* Curved edges */
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7); /* Soft drop shadow */
+            max-width: 1200px; /* Expanded width for all content */
+            width: 90%; /* Full width on smaller screens */
+            backdrop-filter: blur(5px); /* Slight background blur */
+            overflow-y: auto; /* Scroll if content is too long */
+            max-height: 90vh; /* Prevents overflow beyond the viewport */
+        }
+
+        h1, h2, h3 {
+            background: linear-gradient(135deg, #ff69b4, #00ffff); /* Gradient matching background */
+            -webkit-background-clip: text; /* For Safari */
+            -webkit-text-fill-color: transparent; /* Text fill color transparent for gradient effect */
+            margin: 0;
+            animation: glowAnimation 1.5s infinite alternate; /* Glow animation */
+        }
+
+        @keyframes glowAnimation {
+            0% {
+                text-shadow: 0 0 5px rgba(255, 105, 180, 0.5), 0 0 10px rgba(255, 105, 180, 0.3); /* Subtle pink glow */
+            }
+            50% {
+                text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3); /* Subtle cyan glow */
+            }
+            100% {
+                text-shadow: 0 0 5px rgba(255, 105, 180, 0.5), 0 0 10px rgba(255, 105, 180, 0.3); /* Back to subtle pink */
+            }
+        }
+
+        h1 {
+            font-size: 2.5em; /* Adjust font size for mobile */
+        }
+
+        h2 {
+            font-size: 2em; /* Subheading size */
+            margin: 10px 0;
+        }
+
+        h3 {
+            font-size: 1.8em; /* Section heading size */
+            margin-top: 20px; /* Spacing above section headings */
+        }
+
+        p {
+            font-size: 1.2em;
+            margin: 20px 0;
+            opacity: 0.8; /* Slightly transparent text */
+        }
+
+        .about-box, .services-box, .design-box {
+            background: rgba(255, 255, 255, 0.2); /* Lighter background for boxes */
+            border-radius: 15px; /* Curved edges */
+            padding: 20px;
+            margin-top: 30px; /* Spacing above boxes */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Drop shadow for boxes */
+            animation: slideIn 0.5s ease-in-out; /* Slide-in animation */
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px); /* Start position */
+                opacity: 0; /* Initial opacity */
+            }
+            to {
+                transform: translateY(0); /* End position */
+                opacity: 1; /* Final opacity */
+            }
+        }
+
+        .service-item {
+            font-size: 1.2em;
+            margin: 10px 0;
+            padding: 10px; /* Padding around service items */
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Border for each service item */
+            border-radius: 10px; /* Rounded corners for service items */
+            transition: transform 0.3s ease, background 0.3s ease; /* Smooth hover effect */
+            opacity: 0; /* Start as invisible */
+            animation: fadeIn 0.5s forwards; /* Fade-in animation */
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1; /* Final opacity */
+            }
+        }
+
+        .service-item:hover {
+            transform: scale(1.05); /* Slightly enlarge on hover */
+            background: rgba(255, 255, 255, 0.1); /* Slightly darker background on hover */
+        }
+
+        /* Styles for My Design section */
+        .design-box {
+            margin-top: 30px;
+        }
+
+        .design-box h3 {
+            margin-bottom: 20px; /* Space between headline and boxes */
+        }
+
+        .design-items {
+            display: grid; /* Use grid for layout */
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid */
+            gap: 20px; /* Space between boxes */
+            justify-content: center;
+        }
+
+        .design-item {
+            width: 200px; /* Fixed width */
+            height: 200px; /* Fixed height */
+            background-color: rgba(255, 255, 255, 0.3); /* Lighter background for design items */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Drop shadow */
+            transition: transform 0.3s ease; /* Smooth scaling */
+            animation: glow 1.5s infinite alternate; /* Glow animation for each design item */
+            overflow: hidden; /* Ensure images fit inside box */
+        }
+
+        .design-item img {
+            width: 100%; /* Image takes full width */
+            height: 100%; /* Image takes full height */
+            object-fit: cover; /* Make sure image covers the whole box */
+        }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 255, 0, 0.5), 0 0 20px rgba(255, 255, 0, 0.3); /* Initial glow */
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 30px rgba(0, 255, 255, 0.3); /* Intermediate glow */
+            }
+            100% {
+                box-shadow: 0 0 10px rgba(255, 255, 0, 0.5), 0 0 20px rgba(255, 255, 0, 0.3); /* Final glow */
+            }
+        }
+
+        /* Responsive design for smaller screens */
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2em; /* Smaller font for mobile */
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            h3 {
+                font-size: 1.5em;
+            }
+
+            .design-item {
+                height: 150px; /* Reduce box height for smaller screens */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <style>
+        /* ... existing styles ... */
+
+        /* Styles for the review section */
+        .review-box {
+            background: rgba(255, 255, 255, 0.2); /* Lighter background for the review box */
+            border-radius: 15px; /* Curved edges */
+            padding: 20px;
+            margin-top: 30px; /* Space above the review box */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Drop shadow for the review box */
+        }
+
+        .review-input {
+            width: 100%; /* Full width */
+            padding: 10px; /* Padding inside the input */
+            border-radius: 10px; /* Rounded edges */
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Border style */
+            margin-bottom: 10px; /* Space below the input */
+            font-size: 1.1em; /* Font size for input */
+        }
+
+        
+        }
+
+        .submit-review:hover {
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+
+        .thank-you {
+            display: none; /* Hidden by default */
+            margin-top: 20px; /* Space above the thank-you message */
+            font-size: 1.5em; /* Font size for thank-you message */
+            color: #ff69b4; /* Color for the thank-you message */
+            animation: partyAnimation 1s infinite; /* Party animation */
+        }
+
+        @keyframes partyAnimation {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1); /* Scale up for party effect */
+            }
+        }
+
+        .thank-you-message {
+            margin-top: 30px; /* Space above the thank-you visit paragraph */
+            font-size: 1.2em; /* Font size for thank-you visit paragraph */
+            text-align: center; /* Center align */
+            opacity: 0.8; /* Slightly transparent text */
+        }
+
+        /* ... existing styles ... */
+    </style>
+
+    <div class="content-box">
+        <h1>Welcome to Designing Guru</h1>
+        <h2>I am Aathif Anver</h2>
+        
+        <div class="about-box">
+            <h3>About Me</h3>
+            <p>
+                Hello! I’m Aathif Anver, a passionate graphic designer who transforms visions into stunning realities! With a flair for creativity and a keen eye for detail, I craft unique and engaging designs that tell a story. Whether it’s a captivating logo, vibrant social media graphics, or a complete branding makeover, I pour my heart into every project. Let’s collaborate and create something extraordinary together!
+            </p>
+        </div>
+
+        <div class="services-box">
+            <h3>Our Services</h3>
+            <div class="service-item">Logo Design</div>
+            <div class="service-item">Branding and Identity</div>
+            <div class="service-item">Social Media post design</div>
+            <div class="service-item">Print Design</div>
+            <div class="service-item">Illustrator</div>
+        </div>
+
+        <div class="design-box">
+            <h3>My Designs</h3>
+            <div class="design-items">
+                <div class="design-item">
+                    <img src="designe for  guru.jpg" alt="Design Placeholder">
+                </div>
+                <div class="design-item">
+                    <img src="designign guru social media designe.jpg" alt="Design Placeholder">
+                </div>
+                <div class="design-item">
+                    <img src="designign guru social media post.jpg" alt="Design Placeholder">
+                </div>
+                <div class="design-item">
+                    <img src="let us handle you next design project (Ai).jpg" alt="Design Placeholder">
+                </div>
+                <div class="design-item">
+                    <img src="poster designe.jpg" alt="Design Placeholder">
+                </div>
+                <div class="design-item">
+                    <img src="PRICE LIST.jpg" alt="Design Placeholder">
+                </div>
+                <div class="design-item">
+                    <img src="bee manipulation.jpg" alt="Design Placeholder">
+                </div>
+                <div class="design-item">
+                    <img src="coconut manupulation.jpg" alt="Design Placeholder">
+                </div>
+                <div class="design-item">
+                    <img src="COFFEE.jpg" alt="Design Placeholder">
+                </div>
+                <div class="design-item">
+                    <img src="lemon manipulation.jpg" alt="Design Placeholder">
+                </div>
+                <div class="design-item">
+                    <img src="olive oil manipulation.jpg" alt="Design Placeholder">
+                </div>
+                <div class="design-item">
+                    <img src="orange manipulation.jpg" alt="Design Placeholder">
+                </div>
+                <div class="design-item">
+                    <img src="pepsi product  manipulation.jpg" alt="Design Placeholder">
+                </div>
+                <div class="design-item">
+                    <img src="eid post.jpg" alt="Design Placeholder">
+                </div>
+                <div class="design-item">
+                    <img src="vesak designe.jpg" alt="Design Placeholder">
+                </div>
+                <div class="design-item">
+                    <img src="topa.jpg" alt="Design Placeholder">
+                </div>
+                <div class="design-item">
+                    <img src="i phone post designe (s-10).jpg" alt="Design Placeholder">
+                </div>
+                <div class="design-item">
+                    <img src="i phone post designe 2.jpg" alt="Design Placeholder">
+                </div>
+            </div>
+        </div>
+
+        
+
+
+       <!-- Social Media Buttons -->
+<div class="social-media">
+    <h3>Connect with Me</h3>
+    <div>
+        <a href="https://wa.me/94760314388" target="_blank" class="social-button" style="background: linear-gradient(135deg, #25D366, #128C7E);">WhatsApp</a>
+        <a href="https://www.facebook.com/share/vTDj5fJ6qk4EsgdW/?mibextid=qi2Omg" target="_blank" class="social-button" style="background: linear-gradient(135deg, #3b5998, #8b9dc3);">Facebook</a>
+
+        <a href="https://www.instagram.com/aathi_.08?igsh=YzljYTk1ODg3Zg" target="_blank" class="social-button" style="background: linear-gradient(135deg, #C13584, #E1306C);">Instagram</a>
+    </div>
+</div>
+
+
+    <style>
+        .social-media {
+            margin-top: 30px; /* Space above the social media section */
+            text-align: center; /* Center align the social media buttons */
+        }
+
+        .social-button {
+            display: inline-block; /* Inline block for button styling */
+            color: white; /* Text color for buttons */
+            padding: 15px 30px; /* Padding around buttons */
+            border-radius: 10px; /* Rounded edges */
+            text-decoration: none; /* No underline */
+            font-size: 1.2em; /* Font size for buttons */
+            margin: 10px; /* Space between buttons */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Glow effect */
+        }
+
+        .social-button:hover {
+            transform: scale(1.05); /* Slightly enlarge on hover */
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.7); /* Stronger glow on hover */
+        }
+    </style>
+
+   
+
+</body>
+</html>
+
